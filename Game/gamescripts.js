@@ -65,7 +65,7 @@ function GameOver() {
 	doors.forEach(d => d.style.display = 'none');
 	document.querySelector('.this-floor').style.display = 'none';
 	document.querySelector('.metan').style.display = 'none';
-	document.querySelector('.mainvision').style.transition = 'background 2s';
+	document.querySelector('.mainvision').style.transition = 'background 3s';
 	document.querySelector('.mainvision').style.background = 'black';
 
 	var SoundSoundDeath = new Audio();
@@ -89,7 +89,7 @@ function openD() {
 	SoundLiftMove.pause();
 	doors.forEach(d => d.style.width = '20px');
 
-	if (p > 1.5) {
+	if (p > 1.5 && typeof(resp) == 'undefined') {
 		setTimeout(Сough, 1500);
 		function Сough() {
 			var SoundСough = new Audio();
@@ -121,7 +121,10 @@ function lift() {
 	var SoundBtn = new Audio();
   		SoundBtn.src = 'sounds/SoundBtn.mp3';
   		SoundBtn.autoplay = true;
-	
+	if (hl > 16) {
+		GameOver();
+		return false;
+	} 
 	for (i = 0; i < floor.length ; i++) {
 		if (floor[i].checked) {
 			if (floor[i].value == thisfloor) {
@@ -147,12 +150,12 @@ function liftmove(fl) {
 	SoundWind.pause();
 		
 		if (fl > thisfloor) {
-			setTimeout(liftmove, 800, fl);
+			setTimeout(liftmove, 500, fl);
 			thisfloor++;
 			p = p - 0.4;
 		}
 		else if(fl < thisfloor) {
-			setTimeout(liftmove, 800, fl);
+			setTimeout(liftmove, 500, fl);
 			thisfloor--;
 			p = p + 0.4;
 		}
@@ -204,22 +207,28 @@ function events(fl) {
 	if (fl == -4) {
 		document.querySelector('.mainvision').style.background = 'url(images/fl4.jpg)';
 		document.querySelector('.message p').innerHTML = 'Кажется, здесь расположены вентиляционные агрегаты.';
+		if (document.querySelector('.ventilation') !== null) {document.querySelector('.ventilation').style.display = 'block';}
 		if (document.querySelector('.notes3') !== null) {document.querySelector('.notes3').style.display = 'block';}
 	}
 	else {
 		if (document.querySelector('.notes3') !== null) {document.querySelector('.notes3').style.display = 'none';}
+		if (document.querySelector('.ventilation') !== null) {document.querySelector('.ventilation').style.display = 'none';}
 	}
 	if (fl == -5) {
 		document.querySelector('.mainvision').style.background = 'url(images/fl5.jpg)';
-		if (typeof(jack) == 'undefined'){
+		if (typeof(jack5) == 'undefined'){
 			doors.forEach(d => d.style.width = '295px');
 			document.querySelector('.message p').innerHTML = 'Внешнюю дверь лифта заклинило...';
 		} 
-		else if (jack == 1){
+		else if (jack5 == 1){
 			doors.forEach(d => d.style.width = '295px');
-			setTimeout("doors.forEach(d => d.style.width = '20px')", 2300); 
+			setTimeout("doors.forEach(d => d.style.width = '20px')", 3500); 
 			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
-			jack = 2;
+			jack5 = 2;
+			SoundLiftOpen = new Audio();
+  			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
+			setTimeout("SoundLiftOpen.play()", 3500);
+			setTimeout("document.querySelector('.message p').innerHTML = 'Судя по всему, здесь произошел взрыв газа, проход завален.'", 3500); 
 		}
 		else {
 			document.querySelector('.message p').innerHTML = 'Судя по всему, здесь произошел взрыв газа, проход завален.';
@@ -231,8 +240,32 @@ function events(fl) {
 	}
 	if (fl == -6) {
 		document.querySelector('.mainvision').style.background = 'url(images/fl6.jpg)';
-		document.querySelector('.message p').innerHTML = 'Внешняя дверь не открывается до конца, нужна распорка...';
-		doors.forEach(d => d.style.width = '295px');
+		document.querySelector('.stone').style.display = 'block';
+		if (typeof(jack6) == 'undefined'){
+			doors.forEach(d => d.style.width = '295px');
+			document.querySelector('.message p').innerHTML = 'Внешняя дверь не открывается до конца, нужна распорка...';
+		} 
+		else if (jack6 == 1) {
+			doors.forEach(d => d.style.width = '295px');
+			setTimeout("doors.forEach(d => d.style.width = '20px')", 3500); 
+			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
+			jack6 = 2;
+			SoundLiftOpen = new Audio();
+  			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
+			setTimeout("SoundLiftOpen.play()", 3500);
+			setTimeout("document.querySelector('.message p').innerHTML = 'Этот уровень полностью обвалился...'", 3500);
+						
+			if (typeof(rock) == 'undefined') {
+				setTimeout("document.querySelector('.stone').style.top = '467px'; document.querySelector('.stone').style.transform = 'rotate(80deg)'", 5600);
+				setTimeout("SoundStone = new Audio(); SoundStone.src = 'sounds/SoundStone.mp3'; SoundStone.play()", 5900);
+				rock = 1;
+			}
+		}
+		else {
+			document.querySelector('.message p').innerHTML = 'Этот уровень полностью обвалился...';
+		}
+	}
+	else {document.querySelector('.stone').style.display = 'none';
 	}
 	if (fl == -7) {
 		MetanId = setInterval(Metan7, 3000);
@@ -271,7 +304,7 @@ function Rem_notes2() {
 
 function Rem_notes3() {
 		document.querySelector('.notes3').remove(); 
-		document.querySelector('.message p').innerHTML = '"12.04 - Движок пока тарахтит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
+		document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
 }
 
 function Rem_notes4() {
@@ -314,9 +347,41 @@ function Rem_water() {
 		}
 }
 
+function Rem_ventilation() {
+		if (typeof(details) == 'undefined') {
+			document.querySelector('.message p').innerHTML = 'А вот и цель моего визита. Посмотрим... отсутствуют некоторые детали двигателя вентиляционной установки. Таких с собой у меня нет, придется найти на месте.';
+			details = 1;
+		}
+		else if (details == 1) {
+			document.querySelector('.message p').innerHTML = 'Итак, приступим. Это пойдет сюда, это сюда... Затянем...';
+			liftBtn.forEach(f => f.style.visibility = 'hidden');
+
+			var SoundRepair = new Audio();
+  				SoundRepair.src = 'sounds/SoundRepair.mp3';
+  				SoundRepair.autoplay = true;
+
+  			setTimeout(liftBtns, 5000);
+			setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти придурки оставили часть заказанных деталей в бытовке! Избегают меня падлы. Добегаются...&quot;'", 5000);
+			details = 2;
+		}
+		else if (details == 2) {
+			liftBtn.forEach(f => f.style.visibility = 'hidden');
+			document.querySelector('.ventilation').remove();
+			document.querySelector('.message p').innerHTML = 'Финальный ремонт';
+			
+			var SoundRepair = new Audio();
+  				SoundRepair.src = 'sounds/SoundRepair.mp3';
+  				SoundRepair.autoplay = true;
+
+			setTimeout(liftBtns, 5000);
+			setTimeout("document.querySelector('.message p').innerHTML = 'Распорка! Винтовая! Их просто не могло не быть в шахте...'", 5000);
+		}
+}
+
 function Rem_screw_jack() {
 		document.querySelector('.screw_jack').remove();
 		document.querySelector('.tools').innerHTML += '<br><span>Винтовая распорка</span>';
 		document.querySelector('.message p').innerHTML = 'Думаю, я найду ей применение.';
-		jack = 1;
+		jack5 = 1;
+		jack6 = 1;
 }

@@ -81,9 +81,9 @@ p {
 }
 
 .notes3 {
-	bottom: 50px;
-	right: 100px;
-	transform: rotate(50deg);
+	bottom: 40px;
+	right: 40px;
+	transform: rotate(30deg);
 }
 
 .notes4 {
@@ -127,6 +127,30 @@ p {
 	bottom: 23px;
 	right: 100px;
 	transform: rotate(10deg);
+}
+
+.stone {
+	background: url(images/stone.png);
+	display: none;
+	z-index: 2;
+	position: absolute;
+	width: 87px;
+	height: 73px;
+	top: 5px;
+	left: 150px;
+	transform: rotate(180deg);
+	transition: ease-in 0.3s;
+}
+
+.ventilation {
+	display: none;
+	cursor: pointer;
+	z-index: 2;
+	position: absolute;
+	width: 68%;
+	height: 315px;
+	bottom: 75px;
+	left: 60px;
 }
 
 .lift-btn p, .this-floor p, .health p, .tools p, .metan p {
