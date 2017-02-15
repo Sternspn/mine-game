@@ -70,8 +70,8 @@ function GameOver() {
 	document.querySelector('.mainvision').style.background = 'black';
 
 	var SoundSoundDeath = new Audio();
-  		SoundSoundDeath.src = 'sounds/SoundDeath.mp3';
-  		SoundSoundDeath.play();
+	SoundSoundDeath.src = 'sounds/SoundDeath.mp3';
+	SoundSoundDeath.play();
 
 	document.querySelector('.message p').innerHTML = 'Вы погибли. Обновите страницу, чтобы начать заново.';
 
@@ -79,17 +79,17 @@ function GameOver() {
 
 function openD() {
 	var SoundLiftOpen = new Audio();
-  		SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
-  		SoundLiftOpen.autoplay = true;
+	SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
+	SoundLiftOpen.autoplay = true;
 
-  		SoundWind = new Audio();
-  		SoundWind.src = 'sounds/SoundWind.mp3';
-  		SoundWind.loop = true;
+	SoundWind = new Audio();
+	SoundWind.src = 'sounds/SoundWind.mp3';
+	SoundWind.loop = true;
 
-  		SoundCough = new Audio();
-		SoundCough.src = 'sounds/SoundCough.mp3';
+	SoundCough = new Audio();
+	SoundCough.src = 'sounds/SoundCough.mp3';
 
-  	if (thisfloor !== -1) {SoundWind.play();}
+	if (thisfloor !== -1) {SoundWind.play();}
 
 	SoundLiftMove.pause();
 	doors.forEach(d => d.style.width = '20px');
@@ -111,8 +111,8 @@ function liftBtns() {
 
 function closeD() {
 	var SoundLiftClose = new Audio();
-  		SoundLiftClose.src = 'sounds/SoundLiftClose.mp3';
-  		SoundLiftClose.autoplay = true;
+	SoundLiftClose.src = 'sounds/SoundLiftClose.mp3';
+	SoundLiftClose.autoplay = true;
 	var doors = document.querySelectorAll('.door');
 
 	doors.forEach(d => d.style.width = '309px');
@@ -123,8 +123,8 @@ function closeD() {
 
 function lift() {
 	var SoundBtn = new Audio();
-  		SoundBtn.src = 'sounds/SoundBtn.mp3';
-  		SoundBtn.autoplay = true;
+	SoundBtn.src = 'sounds/SoundBtn.mp3';
+	SoundBtn.autoplay = true;
 	if (hl > 16) {
 		GameOver();
 		return false;
@@ -152,10 +152,10 @@ function lift() {
 		document.querySelector('.message p').innerHTML = 'Ну!? Только этого не хватало! Лифт не работает! Я не хочу здесь остаться навечно... Думай!';
 		
 		SoundFear1 = new Audio();
-  		SoundFear1.src = 'sounds/SoundFear1.mp3';
-  		SoundFear1.volume = 0.4;
+		SoundFear1.src = 'sounds/SoundFear1.mp3';
+		SoundFear1.volume = 0.4;
 
-  		setTimeout("SoundFear1.play()", 2500);
+		setTimeout("SoundFear1.play()", 2500);
 		setTimeout("document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4.'", 4000);
 		setTimeout("document.querySelector('.panel').style.display = 'block'", 4000);
 		
@@ -168,14 +168,14 @@ function lift() {
 		}
 	}
 }
-	
+
 function liftmove(fl) {
 	document.querySelector('.this-floor span').innerHTML = thisfloor;
 	document.querySelector('#metan-p').innerHTML = p.toFixed(1);
 	MetanDng(p);
 	SoundWind.pause();
 	SoundRadio.pause();
-		
+	
 	if (fl > thisfloor) {
 		setTimeout(liftmove, 1700, fl);
 		thisfloor++;
@@ -232,7 +232,7 @@ function events(fl) {
 		}
 		if (typeof(rd) !== 'undefined') {
 			SoundRadio.load();
-  			SoundRadio.play();
+			SoundRadio.play();
 		}
 	}
 	else {
@@ -245,7 +245,7 @@ function events(fl) {
 		document.querySelector('.message p').innerHTML = 'Здесь хранится инвентарь, в том числе ИСЗ. Воздушный насос, вроде, ниже.';
 		if (document.querySelector('.box') !== null) {document.querySelector('.box').style.display = 'block';}
 		if (document.querySelector('.box') == null && document.querySelector('.respirator') !== null) {document.querySelector('.respirator').style.display = 'block';}
-		}
+	}
 	else {
 		if (document.querySelector('.box') !== null) {document.querySelector('.box').style.display = 'none';}
 		if (document.querySelector('.respirator') !== null) {document.querySelector('.respirator').style.display = 'none';}
@@ -258,8 +258,8 @@ function events(fl) {
 		if (typeof(d2) !== 'undefined' && typeof(shadow) == 'undefined') {
 			document.querySelector('.tunnel').style.display = 'none';
 			var SoundFear = new Audio();
-  			SoundFear.src = 'sounds/SoundFear2.mp3';
-  			SoundFear.autoplay = true;
+			SoundFear.src = 'sounds/SoundFear2.mp3';
+			SoundFear.autoplay = true;
 			document.querySelector('.shadow').style.display = 'block';
 			setTimeout("document.querySelector('.shadow').style.display = 'none'", 1200);
 			setTimeout("document.querySelector('.tunnel').style.display = 'block'", 1200);
@@ -294,7 +294,7 @@ function events(fl) {
 			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
 			jack5 = 2;
 			SoundLiftOpen = new Audio();
-  			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
+			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
 			setTimeout("SoundLiftOpen.play()", 3500);
 			setTimeout("document.querySelector('.message p').innerHTML = 'Судя по всему, здесь произошел взрыв газа, проход завален.'", 3500);
 			setTimeout("liftBtn.forEach(f => f.style.display = 'block')", 3600); 
@@ -323,11 +323,11 @@ function events(fl) {
 			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
 			jack6 = 2;
 			SoundLiftOpen = new Audio();
-  			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
+			SoundLiftOpen.src = 'sounds/SoundLiftOpen.mp3';
 			setTimeout("SoundLiftOpen.play()", 3500);
 			setTimeout("document.querySelector('.message p').innerHTML = 'Этот уровень полностью обвалился...'", 3500);
 			setTimeout(liftstop, 3500);
-						
+			
 			if (typeof(rock) == 'undefined') {
 				setTimeout("document.querySelector('.stone').style.top = '467px'; document.querySelector('.stone').style.transform = 'rotate(80deg)'", 5600);
 				setTimeout("SoundStone = new Audio(); SoundStone.src = 'sounds/SoundStone.mp3'; SoundStone.play()", 5900);
@@ -351,7 +351,7 @@ function events(fl) {
 			MetanDng(p);
 			document.querySelector('#metan-p').innerHTML = p.toFixed(1);
 			if (p > 20) {
-			 	clearInterval(MetanId);
+				clearInterval(MetanId);
 			}
 			if (thisfloor !== -7) {
 				clearInterval(MetanId);
@@ -366,185 +366,185 @@ function events(fl) {
 	else {
 		if (document.querySelector('.water') !== null) {document.querySelector('.water').style.display = 'none';}
 		if (document.querySelector('.screw_jack') !== null) {document.querySelector('.screw_jack').style.display = 'none';}
-		}
+	}
 }
 
 function Rem_notes1() {
-		document.querySelector('.notes1').remove(); 
-		document.querySelector('.message p').innerHTML = 'Тут свежие записи:<br>"10:00 - Спускаемся. Вентиляция опять работает вполсилы, пора нахрен менять инженерную команду.<br>15:00 - Сработал датчик концентрации газа! Срочно вывожу своих.<br>15:15 - Как назло у Олега и новичков наряд на дальний штрек. Предупредил их по рации, но ждать больше не могу. Надеюсь на само-спасателях выберутся. Поднимаюсь."';
+	document.querySelector('.notes1').remove(); 
+	document.querySelector('.message p').innerHTML = 'Тут свежие записи:<br>"10:00 - Спускаемся. Вентиляция опять работает вполсилы, пора нахрен менять инженерную команду.<br>15:00 - Сработал датчик концентрации газа! Срочно вывожу своих.<br>15:15 - Как назло у Олега и новичков наряд на дальний штрек. Предупредил их по рации, но ждать больше не могу. Надеюсь на само-спасателях выберутся. Поднимаюсь."';
 }
 
 function Rem_notes2() {
-		document.querySelector('.notes2').remove(); 
-		document.querySelector('.message p').innerHTML = '"Хочу довести до руководства, хоть и чувствую себя из-за этого стремно... Вообщем, механик наш, Андрей, он толи подбухивает, толи чем-то похлеще загоняется. Порой бубнит что-то под нос, смотрит в точку, на слова не сразу реагирует. Короче, странный он. Пацаны его сторонятся. И правильно..."';
+	document.querySelector('.notes2').remove(); 
+	document.querySelector('.message p').innerHTML = '"Хочу довести до руководства, хоть и чувствую себя из-за этого стремно... Вообщем, механик наш, Андрей, он толи подбухивает, толи чем-то похлеще загоняется. Порой бубнит что-то под нос, смотрит в точку, на слова не сразу реагирует. Короче, странный он. Пацаны его сторонятся. И правильно..."';
 }
 
 function Rem_notes3() {
-		document.querySelector('.notes3').remove(); 
-		document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
+	document.querySelector('.notes3').remove(); 
+	document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
 }
 
 function Rem_notes4() {
-		document.querySelector('.notes4').remove(); 
-		document.querySelector('.message p').innerHTML = '"20.04 - Кто-то запер решетку в дальний штрек! Долбаную решетку!<br>Пришлось спускаться по вертикалке, через пятый. Еле выбрались. У меня тут трое новичков. Один успел наглататься газа.<br>Руководству нужно срочно принять меры. У нас в коллективе крысы..."';
+	document.querySelector('.notes4').remove(); 
+	document.querySelector('.message p').innerHTML = '"20.04 - Кто-то запер решетку в дальний штрек! Долбаную решетку!<br>Пришлось спускаться по вертикалке, через пятый. Еле выбрались. У меня тут трое новичков. Один успел наглататься газа.<br>Руководству нужно срочно принять меры. У нас в коллективе крысы..."';
 }
 
 function Rem_box() {
-		document.querySelector('.box').remove();
-		document.querySelector('.respirator').style.display = 'block';
-		document.querySelector('.message p').innerHTML = 'Что тут у нас... Вот, кажется, на этом противогазе почти новый фильтр.';
+	document.querySelector('.box').remove();
+	document.querySelector('.respirator').style.display = 'block';
+	document.querySelector('.message p').innerHTML = 'Что тут у нас... Вот, кажется, на этом противогазе почти новый фильтр.';
 }
-	
-function Rem_respirator() {
-		document.querySelector('.respirator').remove();
-		document.querySelector('.tools').innerHTML += '<br><span>Противогаз</span>';
-		resp = 1;
 
-		var SoundBreath = new Audio();
-  		SoundBreath.src = 'sounds/SoundBreath.mp3';
-  		SoundBreath.autoplay = true;
+function Rem_respirator() {
+	document.querySelector('.respirator').remove();
+	document.querySelector('.tools').innerHTML += '<br><span>Противогаз</span>';
+	resp = 1;
+
+	var SoundBreath = new Audio();
+	SoundBreath.src = 'sounds/SoundBreath.mp3';
+	SoundBreath.autoplay = true;
 }
 
 function Rem_water() {
-		if (typeof(bravery) == 'undefined') {
-			document.querySelector('.message p').innerHTML = 'Ох, нужно собраться с духом, чтобы рыться в этой жиже...';
-			bravery = 1;
-		}
-		else if (bravery == 1) {
-			document.querySelector('.message p').innerHTML = 'Сейчас, сейчас... Жаль, что не захватил перчатки...';
-			bravery = 2;
-		}
-		else if (bravery == 2) {
-			liftBtn.forEach(f => f.style.display = 'none');
-			document.querySelector('.water').remove();
-			document.querySelector('.message p').innerHTML = 'Ну ладно, посмотрим, что там может быть...';
-			
-			var SoundWater = new Audio();
-  				SoundWater.src = 'sounds/SoundWater.mp3';
-  				SoundWater.autoplay = true;
+	if (typeof(bravery) == 'undefined') {
+		document.querySelector('.message p').innerHTML = 'Ох, нужно собраться с духом, чтобы рыться в этой жиже...';
+		bravery = 1;
+	}
+	else if (bravery == 1) {
+		document.querySelector('.message p').innerHTML = 'Сейчас, сейчас... Жаль, что не захватил перчатки...';
+		bravery = 2;
+	}
+	else if (bravery == 2) {
+		liftBtn.forEach(f => f.style.display = 'none');
+		document.querySelector('.water').remove();
+		document.querySelector('.message p').innerHTML = 'Ну ладно, посмотрим, что там может быть...';
+		
+		var SoundWater = new Audio();
+		SoundWater.src = 'sounds/SoundWater.mp3';
+		SoundWater.autoplay = true;
 
-			setTimeout(liftBtns, 5000);
-			setTimeout("document.querySelector('.message p').innerHTML = 'Распорка! Винтовая! Их просто не могло не быть в шахте...'", 5000);
-			setTimeout("document.querySelector('.screw_jack').style.display = 'block'", 5000);
-		}
+		setTimeout(liftBtns, 5000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Распорка! Винтовая! Их просто не могло не быть в шахте...'", 5000);
+		setTimeout("document.querySelector('.screw_jack').style.display = 'block'", 5000);
+	}
 }
 
 function Rem_ventilation() {
-		if (typeof(d1) == 'undefined') {
-			document.querySelector('.message p').innerHTML = 'А вот и цель моего визита. Посмотрим... отсутствуют некоторые детали двигателя вентиляционной установки. Таких с собой у меня нет, придется найти на месте.';
-		}
-		else if (d1 == 1) {
-			liftBtn.forEach(f => f.style.display = 'none');
-			document.querySelector('.message p').innerHTML = 'Итак, приступим. Это вернем сюда, это сюда... Затянем...';
-			document.querySelector('.d1').remove();
-			d1 = 2;
-			d2 = 1;
-			rd = 1;
+	if (typeof(d1) == 'undefined') {
+		document.querySelector('.message p').innerHTML = 'А вот и цель моего визита. Посмотрим... отсутствуют некоторые детали двигателя вентиляционной установки. Таких с собой у меня нет, придется найти на месте.';
+	}
+	else if (d1 == 1) {
+		liftBtn.forEach(f => f.style.display = 'none');
+		document.querySelector('.message p').innerHTML = 'Итак, приступим. Это вернем сюда, это сюда... Затянем...';
+		document.querySelector('.d1').remove();
+		d1 = 2;
+		d2 = 1;
+		rd = 1;
 
-			var SoundRepair = new Audio();
-  				SoundRepair.src = 'sounds/SoundRepair.mp3';
-  				SoundRepair.autoplay = true;
+		var SoundRepair = new Audio();
+		SoundRepair.src = 'sounds/SoundRepair.mp3';
+		SoundRepair.autoplay = true;
 
-  			MetanDng(p);	
-  			setTimeout(liftBtns, 5000);
-			setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти придурки оставили часть заказанных деталей в бытовке! Избегают меня... Боятся. Пускай. Мы с болванками им той же монетой отплатим...&quot;'", 5000);
-			setTimeout(MetanDng, 5000, p);
-		}
-		else if (typeof(d2) !== 'undefined' && d2 == 2) {
-			liftBtn.forEach(f => f.style.display = 'none');
-			document.querySelector('.ventilation').remove();
-			document.querySelector('.d2').remove(); 
-			document.querySelector('.message p').innerHTML = 'Теперь всего в достатке. Надо заканчивать и убираться отсюда...';
-			d2 = 3;
+		MetanDng(p);	
+		setTimeout(liftBtns, 5000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти придурки оставили часть заказанных деталей в бытовке! Избегают меня... Боятся. Пускай. Мы с болванками им той же монетой отплатим...&quot;'", 5000);
+		setTimeout(MetanDng, 5000, p);
+	}
+	else if (typeof(d2) !== 'undefined' && d2 == 2) {
+		liftBtn.forEach(f => f.style.display = 'none');
+		document.querySelector('.ventilation').remove();
+		document.querySelector('.d2').remove(); 
+		document.querySelector('.message p').innerHTML = 'Теперь всего в достатке. Надо заканчивать и убираться отсюда...';
+		d2 = 3;
 
-			var SoundRepair = new Audio();
-  				SoundRepair.src = 'sounds/SoundRepair.mp3';
-  				SoundRepair.autoplay = true;
+		var SoundRepair = new Audio();
+		SoundRepair.src = 'sounds/SoundRepair.mp3';
+		SoundRepair.autoplay = true;
 
-  			MetanDng(p);		
-			setTimeout(liftBtns, 5000);
-			setTimeout("document.querySelector('.message p').innerHTML = 'Готово! Почти как новая. Теперь нужно замерить концентрацию газа в глубине главного штрека.'", 5000);
-			setTimeout(MetanDng, 5000, p);
-		}
+		MetanDng(p);		
+		setTimeout(liftBtns, 5000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Готово! Почти как новая. Теперь нужно замерить концентрацию газа в глубине главного штрека.'", 5000);
+		setTimeout(MetanDng, 5000, p);
+	}
 }
 
 function Rem_screw_jack() {
-		document.querySelector('.screw_jack').remove();
-		document.querySelector('.tools').innerHTML += '<br><span>Винтовая распорка</span>';
-		document.querySelector('.message p').innerHTML = 'Думаю, я найду ей применение.';
-		jack5 = 1;
-		jack6 = 1;
+	document.querySelector('.screw_jack').remove();
+	document.querySelector('.tools').innerHTML += '<br><span>Винтовая распорка</span>';
+	document.querySelector('.message p').innerHTML = 'Думаю, я найду ей применение.';
+	jack5 = 1;
+	jack6 = 1;
 }
 
 function Rem_details1() {
-		document.querySelector('.details1').remove(); 
-		document.querySelector('.message p').innerHTML = 'Здесь куча разносортных деталей, но они все новые. Видимо, недавно заказаны. Посмотрим, что получится использовать.';
-		document.querySelector('.tools').innerHTML += '<br><span class="d1">Заказанные детали</span>';
-		d1 = 1;
+	document.querySelector('.details1').remove(); 
+	document.querySelector('.message p').innerHTML = 'Здесь куча разносортных деталей, но они все новые. Видимо, недавно заказаны. Посмотрим, что получится использовать.';
+	document.querySelector('.tools').innerHTML += '<br><span class="d1">Заказанные детали</span>';
+	d1 = 1;
 }
 
 function Rem_details2() {
-		document.querySelector('.details2').remove(); 
-		document.querySelector('.message p').innerHTML = 'Действительно, здесь еще куча деталей справа от лифта.';
-		document.querySelector('.tools').innerHTML += '<span class="d2">Недостающие детали</span>';
-		d2 = 2;
+	document.querySelector('.details2').remove(); 
+	document.querySelector('.message p').innerHTML = 'Действительно, здесь еще куча деталей справа от лифта.';
+	document.querySelector('.tools').innerHTML += '<span class="d2">Недостающие детали</span>';
+	d2 = 2;
 }
 
 function Rem_radio() {
-		if (typeof(rd) == 'undefined') {
-	  		var SoundBtn = new Audio();
-	  		SoundBtn.src = 'sounds/SoundBtn.mp3';
-	  		SoundBtn.autoplay = true;
-  			
-  			document.querySelector('.message p').innerHTML = 'Настроен на внутреннюю частоту. Шахтеры могли слышать переговоры своих товарищей.<br>Не работает.';
-  		}
-  		else {
-  			document.querySelector('.message p').innerHTML = 'Какого черта!? Кажется, он все-таки исправен... И даже что-то ловит.';
-  		}
+	if (typeof(rd) == 'undefined') {
+		var SoundBtn = new Audio();
+		SoundBtn.src = 'sounds/SoundBtn.mp3';
+		SoundBtn.autoplay = true;
+		
+		document.querySelector('.message p').innerHTML = 'Настроен на внутреннюю частоту. Шахтеры могли слышать переговоры своих товарищей.<br>Не работает.';
+	}
+	else {
+		document.querySelector('.message p').innerHTML = 'Какого черта!? Кажется, он все-таки исправен... И даже что-то ловит.';
+	}
 }
 
 function Rem_tunnel() {
-		document.querySelector('.tunnel').style.display = 'none';
-		document.querySelector('.mainvision').style.background = 'url(images/fl3_1.jpg)';
-		document.querySelector('.arrow').style.display = 'block';
-		liftBtn.forEach(f => f.style.display = 'none');
+	document.querySelector('.tunnel').style.display = 'none';
+	document.querySelector('.mainvision').style.background = 'url(images/fl3_1.jpg)';
+	document.querySelector('.arrow').style.display = 'block';
+	liftBtn.forEach(f => f.style.display = 'none');
 
-		if (document.querySelector('.notes2') !== null) {document.querySelector('.notes2').style.display = 'none';}
+	if (document.querySelector('.notes2') !== null) {document.querySelector('.notes2').style.display = 'none';}
 
-		if (typeof(resp) == 'undefined') {
+	if (typeof(resp) == 'undefined') {
 		Сough();
-		}
-		if (typeof(d2) == 'undefined' || d2 !== 3) {
+	}
+	if (typeof(d2) == 'undefined' || d2 !== 3) {
 		p = 2.1;
 		document.querySelector('#metan-p').innerHTML = p.toFixed(1);
 		MetanDng(p);
 		document.querySelector('.message p').innerHTML = 'Дальше мне не пройти. К тому же, концентрация метана там повышается.';
-		}
-		else {
+	}
+	else {
 		p = 0.9;
 		document.querySelector('#metan-p').innerHTML = p.toFixed(1);
 		MetanDng(p);
 		document.querySelector('.message p').innerHTML = 'Есть! Концентрация снижается! Для верности замерю еще... шестой этаж.';
 		liftstop1 = 1;
-		}
+	}
 }
 
 function liftstop() {
-		if (typeof(liftstop1) !== 'undefined'){
+	if (typeof(liftstop1) !== 'undefined'){
 		p = 2.1;
 		document.querySelector('#metan-p').innerHTML = p.toFixed(1);
 		document.querySelector('.message p').innerHTML = 'Хоть немного, но и тут метан упал.<br>Работа сделана, пора возвращаться на поверхность.';
 		liftstop2 = 1;
-		}
+	}
 }
 
 function Rem_arrow() {
-		document.querySelector('.arrow').style.display = 'none';
-		liftBtn.forEach(f => f.style.display = 'block');
-		p = 1.3;
-		document.querySelector('#metan-p').innerHTML = p.toFixed(1);
-		MetanDng(p);
-		events(fl);
+	document.querySelector('.arrow').style.display = 'none';
+	liftBtn.forEach(f => f.style.display = 'block');
+	p = 1.3;
+	document.querySelector('#metan-p').innerHTML = p.toFixed(1);
+	MetanDng(p);
+	events(fl);
 }
 
 function Panel1() {
@@ -619,7 +619,7 @@ function Green() {
 		liftBtns();
 	}
 	else {
-		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...';
+		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4.';
 		liftstop2 = 1;
 		victory = undefined;
 	}
