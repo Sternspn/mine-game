@@ -66,7 +66,7 @@ function GameOver() {
 	document.querySelector('.this-floor').style.display = 'none';
 	document.querySelector('.metan').style.display = 'none';
 	document.querySelector('.lift-btn').style.display = 'none';
-	document.querySelector('.mainvision').style.transition = '3s';
+	document.querySelector('.mainvision').style.transition = '6s';
 	document.querySelector('.mainvision').style.background = 'black';
 
 	var SoundSoundDeath = new Audio();
@@ -216,7 +216,7 @@ function events(fl) {
 			document.querySelector('.this-floor').style.display = 'none';
 			document.querySelector('.metan').style.display = 'none';
 			document.querySelector('.lift-btn').style.display = 'none';
-			document.querySelector('.mainvision').style.transition = '3s';
+			document.querySelector('.mainvision').style.transition = '6s';
 			document.querySelector('.mainvision').style.background = 'white';
 			document.querySelector('.message p').innerHTML = 'Ну наконец-то свежий воздух! Я сделал это!<br>Победа!';
 			SoundWind.pause();
