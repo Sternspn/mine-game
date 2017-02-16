@@ -4,8 +4,8 @@
 
 1. Обязательно включите звук, а еще лучше наденьте наушники. Это лучше передаст атмосферу ;)
 
-2. Для запуска откройте файл index.html в любом современном браузере (очень надеюсь, что он у вас обновляется) или перейдите по ссылке: https://sternspn.github.io/mine-game/
+2. Для запуска откройте файл index.html в любом современном браузере (очень надеюсь, что он у вас обновляется) или [нажмите сюда](https://sternspn.github.io/mine-game/).
 
-Вот [ТАК] (https://github.com/Sternspn/sternspn.github.io/tree/master/mine-game/mine.png) это примерно выглядит.
+Вот это примерно выглядит: ![mine-game](sternspn.github.io/mine-game/mine.png)
 
 Хорошей игры!
