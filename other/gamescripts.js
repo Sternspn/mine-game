@@ -156,7 +156,7 @@ function lift() {
 		SoundFear1.volume = 0.4;
 
 		setTimeout("SoundFear1.play()", 2500);
-		setTimeout("document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4.'", 4000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябанa цифра 4 и надпись &quot;Потом первым выравнивай второй до 6...&quot;'", 4000);
 		setTimeout("document.querySelector('.panel').style.display = 'block'", 4000);
 		
 		MetanId = setInterval(Metan6, 4500);
@@ -619,7 +619,7 @@ function Green() {
 		liftBtns();
 	}
 	else {
-		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4.';
+		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4 и надпись &quot;Потом первым выравнивай второй до 6...&quot;.';
 		liftstop2 = 1;
 		victory = undefined;
 	}
