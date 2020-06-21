@@ -11,6 +11,11 @@ SoundLiftMove.src = 'sounds/SoundLiftMove.mp3';
 SoundRadio = new Audio();
 SoundRadio.src = 'sounds/SoundRadio.mp3';
 
+function startGame() {
+	document.querySelector('span.cursive').style.display = 'none';
+	openD();
+};
+
 function MetanHealth(hl) {
 	if (hl == 0) {
 		document.querySelector('.health span').innerHTML = 'Норма';
