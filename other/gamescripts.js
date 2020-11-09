@@ -212,7 +212,7 @@ function events(fl) {
 			MetanDng(p);
 		}
 		if (typeof(d2) !== 'undefined' && d2 == 3 && typeof(liftstop1) == 'undefined') {
-			document.querySelector('.message p').innerHTML = 'Нужно еще убедиться, что система заработала, сделав замер в глубине главного штрека.';
+			document.querySelector('.message p').innerHTML = 'Нужно еще убедиться, что система заработала, сделав замер в глубине главного штрека на -3 этаже.';
 		} else {
 			document.querySelector('.message p').innerHTML = 'Здесь хотя бы можно отдышаться...';
 		}
