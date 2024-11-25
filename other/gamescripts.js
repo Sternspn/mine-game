@@ -4,6 +4,11 @@ floor = document.querySelectorAll('.floors'); //Массив из радиокн
 doors = document.querySelectorAll('.door'); //Массив из двух элементов - двух дверей лифта. Используется в нескольких функциях
 p = 0.1; //Процент концентрации метана
 hl = 0; //Состояние здоровья
+dead = 0; //Смерть
+stopaction = 0;
+
+test = 0; //Для теста.
+
 
 SoundLiftMove = new Audio(); //Звук движения лифта, используется в нескольких функциях
 SoundLiftMove.src = 'sounds/SoundLiftMove.mp3';
@@ -12,9 +17,18 @@ SoundRadio = new Audio();
 SoundRadio.src = 'sounds/SoundRadio.mp3';
 
 function startGame() {
+	dead = 0;
 	document.querySelector('span.cursive').style.display = 'none';
 	openD();
 };
+function restartGame() {
+	dead = 0;
+	location.reload();
+};
+
+function stopAction(b) {
+	stopaction = b;
+}
 
 function MetanHealth(hl) {
 	if (hl == 0) {
@@ -44,6 +58,7 @@ function MetanHealth(hl) {
 }
 
 function MetanDng(p) {
+	if (test) return
 	if (hl > 16) {
 		GameOver();
 		if (typeof(MetanId) !== 'undefined') {clearInterval(MetanId);}
@@ -65,6 +80,9 @@ function MetanDng(p) {
 }
 
 function GameOver() {
+	dead = 1;
+	document.querySelector('.health span').style.color = 'red';
+	document.querySelector('.health span').innerHTML = 'Мертв';
 	ITS = document.querySelectorAll('.items');
 	ITS.forEach(i => i.remove());
 	
@@ -78,7 +96,7 @@ function GameOver() {
 	SoundSoundDeath.src = 'sounds/SoundDeath.mp3';
 	SoundSoundDeath.play();
 
-	document.querySelector('.message p').innerHTML = 'Вы погибли. Обновите страницу, чтобы начать заново.';
+	document.querySelector('.message p').innerHTML = 'Вы погибли. Следите за уровнем газа. Попробуйте найти средства защиты. <span class="cursive" onclick="restartGame()">Повторить<span>';
 
 }
 
@@ -120,7 +138,7 @@ function closeD() {
 	SoundLiftClose.autoplay = true;
 	var doors = document.querySelectorAll('.door');
 
-	doors.forEach(d => d.style.width = '309px');
+	doors.forEach(d => d.style.width = 'calc(50% + 2px)');
 	if (p > 3) {
 		p = 2.9;
 	}
@@ -161,7 +179,7 @@ function lift() {
 		SoundFear1.volume = 0.4;
 
 		setTimeout("SoundFear1.play()", 2500);
-		setTimeout("document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябанa цифра 4 и надпись &quot;Потом первым выравнивай второй до 6...&quot;'", 4000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>На панели накорябано мелкими буквами: &quot;Сначала второй ряд на 4. Затем двигай первый, пока во втором не будет 6. И третий...&quot; Дальше стерто.'", 4000);
 		setTimeout("document.querySelector('.panel').style.display = 'block'", 4000);
 		
 		MetanId = setInterval(Metan6, 4500);
@@ -182,12 +200,15 @@ function liftmove(fl) {
 	SoundRadio.pause();
 	
 	if (fl > thisfloor) {
-		setTimeout(liftmove, 1700, fl);
+		if (test) {setTimeout(liftmove, 300, fl)
+		} else {setTimeout(liftmove, 600, fl)};
+		
 		thisfloor++;
 		p = p - 0.4;
 	}
 	else if(fl < thisfloor) {
-		setTimeout(liftmove, 1700, fl);
+		if (test) {setTimeout(liftmove, 300, fl)
+		} else {setTimeout(liftmove, 600, fl)};
 		thisfloor--;
 		p = p + 0.4;
 	}
@@ -204,7 +225,7 @@ function liftmoveS(fl) {
 }
 
 function events(fl) {
-	
+	if (dead) return
 	if (fl == 0) {
 		document.querySelector('.mainvision').style.background = 'url(images/fl0.jpg)';
 		if (hl > 5.8) {
@@ -221,8 +242,9 @@ function events(fl) {
 			document.querySelector('.this-floor').style.display = 'none';
 			document.querySelector('.metan').style.display = 'none';
 			document.querySelector('.lift-btn').style.display = 'none';
-			document.querySelector('.mainvision').style.transition = '6s';
-			document.querySelector('.mainvision').style.background = 'white';
+
+			document.querySelector('.mainvision_white').classList.add("active");
+			
 			document.querySelector('.message p').innerHTML = 'Ну наконец-то свежий воздух! Я сделал это!<br>Победа!';
 			SoundWind.pause();
 		}
@@ -319,7 +341,7 @@ function events(fl) {
 		document.querySelector('.stone').style.display = 'block';
 		if (typeof(jack6) == 'undefined'){
 			doors.forEach(d => d.style.width = '295px');
-			document.querySelector('.message p').innerHTML = 'Внешняя дверь не открывается до конца, нужна распорка...';
+			document.querySelector('.message p').innerHTML = 'Дверь не открывается до конца, нужна распорка...';
 		} 
 		else if (jack6 == 1) {
 			liftBtn.forEach(f => f.style.display = 'none');
@@ -376,7 +398,7 @@ function events(fl) {
 
 function Rem_notes1() {
 	document.querySelector('.notes1').remove(); 
-	document.querySelector('.message p').innerHTML = 'Тут свежие записи:<br>"10:00 - Спускаемся. Вентиляция опять работает вполсилы, пора нахрен менять инженерную команду.<br>15:00 - Сработал датчик концентрации газа! Срочно вывожу своих.<br>15:15 - Как назло у Олега и новичков наряд на дальний штрек. Предупредил их по рации, но ждать больше не могу. Надеюсь на само-спасателях выберутся. Поднимаюсь."';
+	document.querySelector('.message p').innerHTML = 'Тут свежие записи:<br>"10:00 - Спускаемся. Вентиляция опять работает вполсилы, сколько можно, пора менять механиков.<br>15:00 - Сработал датчик концентрации газа! Срочно вывожу своих.<br>15:15 - Как назло у Олега и новичков наряд на дальний штрек. Предупредил их по рации, но ждать больше не могу. Надеюсь на само-спасателях выберутся. Поднимаюсь."';
 }
 
 function Rem_notes2() {
@@ -385,6 +407,7 @@ function Rem_notes2() {
 }
 
 function Rem_notes3() {
+	if (stopaction) return
 	document.querySelector('.notes3').remove(); 
 	document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
 }
@@ -439,6 +462,7 @@ function Rem_ventilation() {
 		document.querySelector('.message p').innerHTML = 'А вот и цель моего визита. Посмотрим... отсутствуют некоторые детали двигателя вентиляционной установки. Таких с собой у меня нет, придется найти на месте.';
 	}
 	else if (d1 == 1) {
+		stopAction(1)
 		liftBtn.forEach(f => f.style.display = 'none');
 		document.querySelector('.message p').innerHTML = 'Итак, приступим. Это вернем сюда, это сюда... Затянем...';
 		document.querySelector('.d1').remove();
@@ -454,6 +478,7 @@ function Rem_ventilation() {
 		setTimeout(liftBtns, 5000);
 		setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти придурки оставили часть заказанных деталей в бытовке! Избегают меня... Боятся. Пускай. Мы с болванками им той же монетой отплатим...&quot;'", 5000);
 		setTimeout(MetanDng, 5000, p);
+		setTimeout(stopAction, 5000, 0);
 	}
 	else if (typeof(d2) !== 'undefined' && d2 == 2) {
 		liftBtn.forEach(f => f.style.display = 'none');
@@ -468,7 +493,7 @@ function Rem_ventilation() {
 
 		MetanDng(p);		
 		setTimeout(liftBtns, 5000);
-		setTimeout("document.querySelector('.message p').innerHTML = 'Готово! Почти как новая. Теперь нужно замерить концентрацию газа в глубине главного штрека.'", 5000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Готово! Почти как новая. Теперь нужно замерить концентрацию газа в глубине главного штрека на -3 этаже.'", 5000);
 		setTimeout(MetanDng, 5000, p);
 	}
 }
@@ -504,11 +529,13 @@ function Rem_radio() {
 		document.querySelector('.message p').innerHTML = 'Настроен на внутреннюю частоту. Шахтеры могли слышать переговоры своих товарищей.<br>Не работает.';
 	}
 	else {
-		document.querySelector('.message p').innerHTML = 'Какого черта!? Кажется, он все-таки исправен... И даже что-то ловит.';
+		document.querySelector('.message p').innerHTML = 'Какого черта!? Кажется, он что-то ловит.';
 	}
 }
 
 function Rem_tunnel() {
+	let doors = document.querySelectorAll('.door');
+	doors.forEach((el) => el.style.display = 'none');
 	document.querySelector('.tunnel').style.display = 'none';
 	document.querySelector('.mainvision').style.background = 'url(images/fl3_1.jpg)';
 	document.querySelector('.arrow').style.display = 'block';
@@ -544,6 +571,8 @@ function liftstop() {
 }
 
 function Rem_arrow() {
+	let doors = document.querySelectorAll('.door');
+	doors.forEach((el) => el.style.display = 'block');
 	document.querySelector('.arrow').style.display = 'none';
 	liftBtn.forEach(f => f.style.display = 'block');
 	p = 1.3;
@@ -624,7 +653,7 @@ function Green() {
 		liftBtns();
 	}
 	else {
-		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>Рядом со вторым рядом, на панели накорябана цифра 4 и надпись &quot;Потом первым выравнивай второй до 6...&quot;.';
+		document.querySelector('.message p').innerHTML = 'Так, посмотрим... Нужно выставить контакты в рабочее положение для перезапуска...<br>На панели накорябано мелкими буквами: &quot;Сначала второй ряд на 4. Затем двигай первый, пока во втором не будет 6. И третий...&quot; Дальше стерто.';
 		liftstop2 = 1;
 		victory = undefined;
 	}

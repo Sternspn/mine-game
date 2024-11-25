@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: url(../images/main.jpg);
+	background-size: cover;
 }
 
 p {
@@ -24,13 +25,24 @@ p {
 	margin: 20px 0 10px 20px;
 	width: 620px;
 	height: 560px;
-	background: url(../images/fl0.jpg);
+	background: url(../images/fl0.jpg) center;
+	background-size: cover;
 	border: 1px solid black;
 	position: relative;
 	float: left;
 	z-index: 1;
 }
-
+.mainvision_white {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all 6s;
+	background-color: white;
+}
+.mainvision_white.active {
+	opacity: .9;
+}
 .stats {
 	margin: 20px 20px 0 20px;
 	width: 310px;
@@ -40,32 +52,41 @@ p {
 }
 
 .door {
-	width: 309px;
-	height: 560px;
+	width: calc(50% + 2px);
+	height: 100%;
 	position: absolute;
 	background-color: #53433B;
+	background-repeat: no-repeat;
+	background-size: cover;
 	transition: width 1.7s;
 	z-index: 3;
 }
 
 .left {
-	left: 0;
+	background-position: right center;
+	background-image: url(../images/left_door.png);
+	left: -2px;
 	border-right: 1px solid black;
 }
 
 .right {
-	right: 0;
+	background-position: left center;
+	background-image: url(../images/right_door.png);
+	right: -2px;
 	border-left: 1px solid black;
 }
-
+.finds {
+	border: 1px solid #ffffff;
+    border-radius: 50%;
+}
 .notes1, .notes2, .notes3, .notes4 {
-	background: url(../images/notes.jpg);
+	background: url(../images/notes.jpg) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
 	position: absolute;
-	width: 97px;
-	height: 103px;
+	width: 135px;
+	height: 135px;
 }
 
 .notes1 {
@@ -104,12 +125,12 @@ p {
 }
 
 .respirator {
-	background: url(../images/respirator.png);
+	background: url(../images/respirator.png) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
 	position: absolute;
-	width: 69px;
+	width: 107px;
 	height: 107px;
 	bottom: 23px;
 	left: 262px;
@@ -128,20 +149,20 @@ p {
 }
 
 .screw_jack {
-	background: url(../images/screw_jack.png);
+	background: url(../images/screw_jack.png) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
 	position: absolute;
 	width: 121px;
-	height: 65px;
+	height: 121px;
 	bottom: 23px;
 	right: 100px;
 	transform: rotate(10deg);
 }
 
 .stone {
-	background: url(../images/stone.png);
+	background: url(../images/stone.png) no-repeat center;
 	display: none;
 	z-index: 2;
 	position: absolute;
@@ -165,13 +186,13 @@ p {
 }
 
 .details1, .details2 {
-	background: url(../images/details.png);
+	background: url(../images/details.png) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
 	position: absolute;
 	width: 160px;
-	height: 107px;
+	height: 160px;
 }
 
 .details1 {
@@ -185,7 +206,7 @@ p {
 }
 
 .radio {
-	background: url(../images/radio.png);
+	background: url(../images/radio.png) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
@@ -208,7 +229,7 @@ p {
 }
 
 .arrow {
-	background: url(../images/arrow.png);
+	background: url(../images/arrow.png) no-repeat center;
 	display: none;
 	cursor: pointer;
 	z-index: 2;
@@ -220,7 +241,7 @@ p {
 }
 
 .shadow {
-	background: url(../images/shadow.png);
+	background: url(../images/shadow.png) no-repeat center;
 	display: none;
 	z-index: 2;
 	position: absolute;
@@ -270,6 +291,7 @@ p {
 	float: left;
 	margin-bottom: 5px;
 	cursor: pointer;
+	height: 28px;
 }
 
 .floors {
@@ -312,7 +334,7 @@ p {
 	width: 970px;
 	height: 150px;
 	margin: 8px 0 0 20px;
-	font: italic 23px sans-serif;
+	font: italic 19px sans-serif;
 }
 
 span.cursive {
