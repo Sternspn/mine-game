@@ -104,7 +104,7 @@ function GameOver() {
 	SoundSoundDeath.src = 'sounds/SoundDeath.mp3';
 	SoundSoundDeath.play();
 
-	document.querySelector('.message p').innerHTML = 'Вы погибли. Следите за уровнем газа. Попробуйте найти средства защиты. <span class="cursive" onclick="restartGame()">Повторить<span>';
+	document.querySelector('.message p').innerHTML = 'Вы погибли. Следите за уровнем газа. Попробуйте найти средства защиты.<br><br><span class="cursive" onclick="restartGame()">Повторить<span>';
 
 }
 
@@ -125,7 +125,7 @@ function openD() {
 	SoundLiftMove.pause();
 	doors.forEach(d => d.style.width = '20px');
 
-	if (p > 1.5 && typeof(resp) == 'undefined') {
+	if (p > 1.5 && typeof(resp) == 'undefined' && !dead) {
 		setTimeout(Сough, 1500);
 	}
 
@@ -560,7 +560,7 @@ function Rem_tunnel() {
 
 	if (document.querySelector('.notes2') !== null) {document.querySelector('.notes2').style.display = 'none';}
 
-	if (typeof(resp) == 'undefined') {
+	if (typeof(resp) == 'undefined' && !dead) {
 		Сough();
 	}
 	if (typeof(d2) == 'undefined' || d2 !== 3) {
