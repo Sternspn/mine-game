@@ -11,7 +11,7 @@ playtimeS = 0;
 startTime = 0;
 endTime = 0;
 
-test = 1; //Для теста.
+test = 0; //Для теста.
 
 
 SoundLiftMove = new Audio(); //Звук движения лифта, используется в нескольких функциях
