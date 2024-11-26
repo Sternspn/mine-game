@@ -44,7 +44,7 @@ function MetanHealth(hl) {
 		document.querySelector('.health span').style.color = 'black';
 	}
 	if (hl > 2.4) {
-		document.querySelector('.health span').innerHTML = 'Легкое головокружение';
+		document.querySelector('.health span').innerHTML = 'Головокружение';
 		document.querySelector('.health span').style.color = 'black';
 	}
 	if (hl > 5.8) {
@@ -53,11 +53,11 @@ function MetanHealth(hl) {
 	}
 	if (hl > 8.6) {
 		document.querySelector('.health span').style.color = 'black';
-		document.querySelector('.health span').innerHTML = 'Болит голова, дыхание затруднено';
+		document.querySelector('.health span').innerHTML = 'Болит голова';
 	}
 	if (hl > 12.4) {
 		document.querySelector('.health span').style.color = 'red';
-		document.querySelector('.health span').innerHTML = 'Еле дышу, клонит в сон';
+		document.querySelector('.health span').innerHTML = 'Еле дышу';
 	}
 	if (hl > 15.2) {
 		document.querySelector('.health span').style.color = 'red';
