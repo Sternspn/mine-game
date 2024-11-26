@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
-	<title>Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Mine</title>
 	<link rel="stylesheet" href="other/gamestyle.css">
 	<link rel="prefetch prerender" href="images/main.jpg">
 	<link rel="prefetch prerender" href="images/fl0.jpg">
@@ -17,6 +18,14 @@
 </head>
 <body>
 	<div class="main">
+		<div class="top_stats">
+			<div class="health">
+				<p>Состояние: <span>Норма</span><span id='hls'></span></p>
+			</div>
+			<div class="metan">
+				<p>Метан: <span id='metan-p'>0.1</span><span id='metan-z'>%</span></p>
+			</div>
+		</div>
 		<div class="mainvision">
 			<div class="mainvision_white"></div>
 			<div class="notes1 items finds" onclick="Rem_notes1()"></div>
@@ -44,40 +53,28 @@
 			</div>
 		</div>
 		<div class="stats">
-			<div class='lift-btn' onclick="lift()">
-				<p>Лифт</p>
-				<label><input type="radio" class='floors' name='floors' value="0">&nbsp;0 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-1">-1 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-2">-2 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-3">-3 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-4">-4 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-5">-5 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-6">-6 этаж</label>
-				<label><input type="radio" class='floors' name='floors' value="-7">-7 этаж</label>
-			</div>
 			<div class="this-floor">
-				<p>Текущий этаж</p>
-				<span>0</span>
-			</div>
-			<div class="metan">
-				<p>Концентрация метана</p>
-				<span id='metan-p'>0.1</span><span id='metan-z'>%</span>
-			</div>
-			<div class="clear"></div>
-			<div class="health">
-				<p>Ваше состояние</p>
-				<span>Норма</span>
-				<span id='hls'></span>
-			</div>
+				<p><span>0</span> этаж</p>
+			</div>	
+			<div class='lift-btn' onclick="lift()">
+				<label><input type="radio" class='floors' name='floors' value="0"><span>&nbsp;0</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-1"><span>-1</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-2"><span>-2</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-3"><span>-3</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-4"><span>-4</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-5"><span>-5</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-6"><span>-6</span></label>
+				<label><input type="radio" class='floors' name='floors' value="-7"><span>-7</span></label>
+			</div>	
+		</div>
+		<div class="bot_stats">
 			<div class="tools">
-				<p>Инвентарь</p>
-				<span>Газоанализатор</span>
+				<p>Инвентарь: <span>Газоанализатор </span></p>
 			</div>
-			
 		</div>
 		<div class="clear"></div>
 		<div class="message">
-			<p>Я прибыл на очередную заявку.<br>"В шахте отказали воздушные насосы, высокая концентрация метана".<br>Рабочие были эвакуированы еще две недели назад, а инженерную компанию вызвали только что. Благо все агрегаты расположены рядом с лифтом.<br>Мне нужно лишь найти верный этаж и не надышаться газом.<br><br>Включите ЗВУК для лучшего опыта<br><span class="cursive" onclick="startGame()">Нажмите, чтобы НАЧАТЬ<span></p>
+			<p><span class="info_sound">Включите ЗВУК для полноценного опыта</span><br><span class="cursive" onclick="startGame()">Нажмите, чтобы НАЧАТЬ<span></p>
 		</div>
 	</div>
 	

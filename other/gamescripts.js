@@ -6,8 +6,12 @@ p = 0.1; //Процент концентрации метана
 hl = 0; //Состояние здоровья
 dead = 0; //Смерть
 stopaction = 0;
+playtimeM = 0;
+playtimeS = 0;
+startTime = 0;
+endTime = 0;
 
-test = 0; //Для теста.
+test = 1; //Для теста.
 
 
 SoundLiftMove = new Audio(); //Звук движения лифта, используется в нескольких функциях
@@ -17,8 +21,12 @@ SoundRadio = new Audio();
 SoundRadio.src = 'sounds/SoundRadio.mp3';
 
 function startGame() {
+	startTime = Date.now();
+	playtimeM = 0;
+	playtimeS = 0;
 	dead = 0;
-	document.querySelector('span.cursive').style.display = 'none';
+	document.querySelector('.message p').innerHTML = '';
+	document.querySelector('.message p').innerHTML = 'Я прибыл на очередную заявку.<br>"В шахте отказали воздушные насосы, высокая концентрация метана".<br>Рабочие эвакуированы еще неделю назад, а инженерную компанию вызвали только что. Как назло напарник заболел... Благо все агрегаты расположены рядом с лифтом.<br>Мне нужно лишь найти верный этаж и не надышаться газом.';
 	openD();
 };
 function restartGame() {
@@ -227,7 +235,7 @@ function liftmoveS(fl) {
 function events(fl) {
 	if (dead) return
 	if (fl == 0) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl0.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl0.jpg)';
 		if (hl > 5.8) {
 			hl = 3.8;
 			MetanDng(p);
@@ -245,12 +253,21 @@ function events(fl) {
 
 			document.querySelector('.mainvision_white').classList.add("active");
 			
-			document.querySelector('.message p').innerHTML = 'Ну наконец-то свежий воздух! Я сделал это!<br>Победа!';
+			endTime = Date.now();
+			let diff = endTime - startTime;
+			
+			let min = Math.floor(diff / 60000);
+			let sec_part = diff % 60000;
+			let sec = Math.floor(sec_part / 1000);
+			playtimeM = min;
+			playtimeS = sec;
+
+			document.querySelector('.message p').innerHTML = `Ну наконец-то свежий воздух! Я сделал это!<br>Победа! Вы справились за ${playtimeM} минут(ы) ${playtimeM} секунд(ы).<br><br><span class="cursive" onclick="restartGame()">Повторить<span>`;
 			SoundWind.pause();
 		}
 	} 
 	if (fl == -1) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl1.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl1.jpg)';
 		document.querySelector('.message p').innerHTML = 'На этом этаже всего лишь комната отдыха...';
 		document.querySelector('.radio').style.display = 'block';
 		if (document.querySelector('.notes1') !== null) {document.querySelector('.notes1').style.display = 'block';}
@@ -268,7 +285,7 @@ function events(fl) {
 		if (document.querySelector('.details2') !== null) {document.querySelector('.details2').style.display = 'none';}
 	}
 	if (fl == -2) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl2.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl2.jpg)';
 		document.querySelector('.message p').innerHTML = 'Здесь хранится инвентарь, в том числе ИСЗ. Воздушный насос, вроде, ниже.';
 		if (document.querySelector('.box') !== null) {document.querySelector('.box').style.display = 'block';}
 		if (document.querySelector('.box') == null && document.querySelector('.respirator') !== null) {document.querySelector('.respirator').style.display = 'block';}
@@ -278,7 +295,7 @@ function events(fl) {
 		if (document.querySelector('.respirator') !== null) {document.querySelector('.respirator').style.display = 'none';}
 	}
 	if (fl == -3) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl3.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl3.jpg)';
 		document.querySelector('.message p').innerHTML = 'Это, должно быть, главный штрек...';
 		document.querySelector('.tunnel').style.display = 'block';
 		if (document.querySelector('.notes2') !== null) {document.querySelector('.notes2').style.display = 'block';}
@@ -290,7 +307,7 @@ function events(fl) {
 			document.querySelector('.shadow').style.display = 'block';
 			setTimeout("document.querySelector('.shadow').style.display = 'none'", 1200);
 			setTimeout("document.querySelector('.tunnel').style.display = 'block'", 1200);
-			setTimeout("document.querySelector('.message p').innerHTML = 'Твою мать! Кто там!? ...Я, кажется, все-таки надышался...'", 1200);
+			setTimeout("document.querySelector('.message p').innerHTML = 'Эй! Кто там!? ...Я, кажется, все-таки надышался...'", 1200);
 			shadow = 1;
 		}
 	}
@@ -299,7 +316,7 @@ function events(fl) {
 		if (document.querySelector('.notes2') !== null) {document.querySelector('.notes2').style.display = 'none';}
 	}
 	if (fl == -4) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl4.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl4.jpg)';
 		document.querySelector('.message p').innerHTML = 'Кажется, здесь расположены вентиляционные агрегаты.';
 		if (document.querySelector('.ventilation') !== null) {document.querySelector('.ventilation').style.display = 'block';}
 		if (document.querySelector('.notes3') !== null) {document.querySelector('.notes3').style.display = 'block';}
@@ -309,14 +326,14 @@ function events(fl) {
 		if (document.querySelector('.ventilation') !== null) {document.querySelector('.ventilation').style.display = 'none';}
 	}
 	if (fl == -5) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl5.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl5.jpg)';
 		if (typeof(jack5) == 'undefined'){
-			doors.forEach(d => d.style.width = '295px');
-			document.querySelector('.message p').innerHTML = 'Внешнюю дверь лифта заклинило...';
+			doors.forEach(d => d.style.width = 'calc(49% + 2px)');
+			document.querySelector('.message p').innerHTML = 'Дверь лифта заклинило...';
 		} 
 		else if (jack5 == 1){
 			liftBtn.forEach(f => f.style.display = 'none');
-			doors.forEach(d => d.style.width = '295px');
+			doors.forEach(d => d.style.width = 'calc(49% + 2px)');
 			setTimeout("doors.forEach(d => d.style.width = '20px')", 3500); 
 			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
 			jack5 = 2;
@@ -337,15 +354,15 @@ function events(fl) {
 		if (document.querySelector('.details1') !== null) {document.querySelector('.details1').style.display = 'none';}
 	}
 	if (fl == -6) {
-		document.querySelector('.mainvision').style.background = 'url(images/fl6.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl6.jpg)';
 		document.querySelector('.stone').style.display = 'block';
 		if (typeof(jack6) == 'undefined'){
-			doors.forEach(d => d.style.width = '295px');
+			doors.forEach(d => d.style.width = 'calc(49% + 2px)');
 			document.querySelector('.message p').innerHTML = 'Дверь не открывается до конца, нужна распорка...';
 		} 
 		else if (jack6 == 1) {
 			liftBtn.forEach(f => f.style.display = 'none');
-			doors.forEach(d => d.style.width = '295px');
+			doors.forEach(d => d.style.width = 'calc(49% + 2px)');
 			setTimeout("doors.forEach(d => d.style.width = '20px')", 3500); 
 			document.querySelector('.message p').innerHTML = 'Самое время применить распорку...';
 			jack6 = 2;
@@ -356,7 +373,7 @@ function events(fl) {
 			setTimeout(liftstop, 3500);
 			
 			if (typeof(rock) == 'undefined') {
-				setTimeout("document.querySelector('.stone').style.top = '467px'; document.querySelector('.stone').style.transform = 'rotate(80deg)'", 5600);
+				setTimeout("document.querySelector('.stone').style.top = '80%'; document.querySelector('.stone').style.transform = 'rotate(80deg)'", 5600);
 				setTimeout("SoundStone = new Audio(); SoundStone.src = 'sounds/SoundStone.mp3'; SoundStone.play()", 5900);
 				setTimeout("liftBtn.forEach(f => f.style.display = 'block')", 6000);
 				rock = 1;
@@ -385,7 +402,7 @@ function events(fl) {
 			}
 		}
 
-		document.querySelector('.mainvision').style.background = 'url(images/fl7.jpg)';
+		document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl7.jpg)';
 		document.querySelector('.message p').innerHTML = 'Штрек затоплен. Концентрация газа на этом этаже максимальна. Здесь опасно долго находиться... Кажется, под водой остались какие-то инструменты.';
 		if (document.querySelector('.water') !== null) {document.querySelector('.water').style.display = 'block';}
 		if (document.querySelector('.water') == null && document.querySelector('.screw_jack') !== null) {document.querySelector('.screw_jack').style.display = 'block';}
@@ -409,7 +426,7 @@ function Rem_notes2() {
 function Rem_notes3() {
 	if (stopaction) return
 	document.querySelector('.notes3').remove(); 
-	document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Тарахтит и тарахтит, тарахтит и тарахтит! Не могу больше терпеть, остановлю внепланово, смажу.<br>17.04 - Этой железной скотине лишь бы жрать, все уже поменял, что ей неймется!?<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Ну ничего, детали пришли, возьмусь за нее, когда дверь на 5-м уважу, ато та тоже в печали."';
+	document.querySelector('.message p').innerHTML = '"12.04 - Движок пока дышит, но это ненадолго. Заказал детали.<br>14.04 - Агрегат издает жуткие звуки! Не могу больше терпеть, остановлю внепланово.<br>17.04 - Этой железной скотине лишь бы жрать, почти все поменял!<br>18.04 - Сволочь, как живая. Сказать мне что-то хочет. Детали пришли, возьмусь за нее после лифта."';
 }
 
 function Rem_notes4() {
@@ -425,7 +442,7 @@ function Rem_box() {
 
 function Rem_respirator() {
 	document.querySelector('.respirator').remove();
-	document.querySelector('.tools').innerHTML += '<br><span>Противогаз</span>';
+	document.querySelector('.tools p').innerHTML += '<span> Противогаз </span>';
 	resp = 1;
 
 	var SoundBreath = new Audio();
@@ -464,7 +481,7 @@ function Rem_ventilation() {
 	else if (d1 == 1) {
 		stopAction(1)
 		liftBtn.forEach(f => f.style.display = 'none');
-		document.querySelector('.message p').innerHTML = 'Итак, приступим. Это вернем сюда, это сюда... Затянем...';
+		document.querySelector('.message p').innerHTML = 'Итак, приступим. Это снимем, это ввернем сюда... Затянем...';
 		document.querySelector('.d1').remove();
 		d1 = 2;
 		d2 = 1;
@@ -476,7 +493,7 @@ function Rem_ventilation() {
 
 		MetanDng(p);	
 		setTimeout(liftBtns, 5000);
-		setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти придурки оставили часть заказанных деталей в бытовке! Избегают меня... Боятся. Пускай. Мы с болванками им той же монетой отплатим...&quot;'", 5000);
+		setTimeout("document.querySelector('.message p').innerHTML = 'Мда... Нехватает всего-то шкива, пары фланцев и сальника...<br>Видел в рубке какой-то журнал, может он поможет... Так... Вот!<br>&quot;19.04 - Эти недоумки оставили часть заказанных деталей в бытовке! Избегают меня... Боятся. Пускай. Мы с болванками им той же монетой отплатим...&quot;'", 5000);
 		setTimeout(MetanDng, 5000, p);
 		setTimeout(stopAction, 5000, 0);
 	}
@@ -500,7 +517,7 @@ function Rem_ventilation() {
 
 function Rem_screw_jack() {
 	document.querySelector('.screw_jack').remove();
-	document.querySelector('.tools').innerHTML += '<br><span>Винтовая распорка</span>';
+	document.querySelector('.tools p').innerHTML += '<span> Винтовая распорка </span>';
 	document.querySelector('.message p').innerHTML = 'Думаю, я найду ей применение.';
 	jack5 = 1;
 	jack6 = 1;
@@ -509,14 +526,14 @@ function Rem_screw_jack() {
 function Rem_details1() {
 	document.querySelector('.details1').remove(); 
 	document.querySelector('.message p').innerHTML = 'Здесь куча разносортных деталей, но они все новые. Видимо, недавно заказаны. Посмотрим, что получится использовать.';
-	document.querySelector('.tools').innerHTML += '<br><span class="d1">Заказанные детали</span>';
+	document.querySelector('.tools p').innerHTML += '<span class="d1"> Заказанные детали </span>';
 	d1 = 1;
 }
 
 function Rem_details2() {
 	document.querySelector('.details2').remove(); 
-	document.querySelector('.message p').innerHTML = 'Действительно, здесь еще куча деталей справа от лифта.';
-	document.querySelector('.tools').innerHTML += '<span class="d2">Недостающие детали</span>';
+	document.querySelector('.message p').innerHTML = 'Действительно, здесь еще куча деталей...';
+	document.querySelector('.tools p').innerHTML += '<span class="d2"> Недостающие детали </span>';
 	d2 = 2;
 }
 
@@ -537,7 +554,7 @@ function Rem_tunnel() {
 	let doors = document.querySelectorAll('.door');
 	doors.forEach((el) => el.style.display = 'none');
 	document.querySelector('.tunnel').style.display = 'none';
-	document.querySelector('.mainvision').style.background = 'url(images/fl3_1.jpg)';
+	document.querySelector('.mainvision').style.backgroundImage = 'url(images/fl3_1.jpg)';
 	document.querySelector('.arrow').style.display = 'block';
 	liftBtn.forEach(f => f.style.display = 'none');
 
